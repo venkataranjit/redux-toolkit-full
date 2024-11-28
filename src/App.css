@@ -1,0 +1,7 @@
+.btn-dark {
+  padding: 2px 5px !important;
+  span {
+    font-size: 16px;
+    vertical-align: text-top;
+  }
+}
