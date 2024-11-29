@@ -1,21 +1,21 @@
 import { useSelector } from "react-redux";
 import AddTeacher from "../components/AddTeacher";
 import ViewTeachers from "../components/ViewTeachers";
-import UpdateTeacher from "../components/UpdateTeacher";
 import { useDispatch } from "react-redux";
 import { getTeachers } from "../app/teachersSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import teachersData from "../app/teachersData";
+import UpdateTeacherHistory from "../components/UpdateTeacherHistory";
 
 const Teachers = () => {
   const dispatch = useDispatch();
-  const teacher = useSelector((state) => state.teacher);
+  const teacherState = useSelector((state) => state.teacher);
 
   useEffect(() => {
     dispatch(getTeachers(teachersData));
   }, []);
 
-  console.log(teacher);
+  console.log(teacherState);
   return (
     <>
       <h3>Teachers</h3>
@@ -24,7 +24,7 @@ const Teachers = () => {
           <AddTeacher />
         </div>
         <div className="col-sm-6">
-          <UpdateTeacher />
+          <UpdateTeacherHistory />
         </div>
       </div>
 

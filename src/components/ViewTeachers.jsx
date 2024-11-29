@@ -6,7 +6,7 @@ import { Slide, toast } from "react-toastify";
 import EditTeacher from "./EditTeacher";
 
 const ViewTeachers = () => {
-  const teacher = useSelector((state) => state.teacher);
+  const teacherState = useSelector((state) => state.teacher);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -36,7 +36,7 @@ const ViewTeachers = () => {
 
   return (
     <>
-      {teacher.teachers.length > 0 ? (
+      {teacherState.teachers.length > 0 ? (
         <Table striped bordered hover className="mt-3">
           <thead>
             <tr className="table-dark">
@@ -48,7 +48,7 @@ const ViewTeachers = () => {
             </tr>
           </thead>
           <tbody>
-            {teacher.teachers.map((t) => (
+            {teacherState.teachers.map((t) => (
               <tr key={t.id}>
                 <td>{t.id.substring(0, 10)}</td>
                 <td>{t.teacherName}</td>

@@ -6,6 +6,9 @@ import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Students from "./pages/Students";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -14,11 +17,15 @@ function App() {
       <NavBar />
       <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/teachers" element={<Teachers />} />
           <Route path="/students" element={<Students />} />
         </Routes>
       </Container>
+      <Footer />
     </>
   );
 }

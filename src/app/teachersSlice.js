@@ -21,7 +21,6 @@ export const teacherSlice = createSlice({
       state.addTeacher = newTeacher;
     },
     deleteTeacher: (state, action) => {
-      console.log(action.payload);
       state.deleteTeacher = state.teachers.find((t) => t.id === action.payload);
       state.teachers = state.teachers.filter((t) => t.id !== action.payload);
     },
@@ -35,8 +34,8 @@ export const teacherSlice = createSlice({
         };
         state.teachers[teacherIndex] = {
           ...state.teachers[teacherIndex],
-          teacherName,
-          teacherQualification,
+          teacherName: teacherName,
+          teacherQualification: teacherQualification,
         };
       }
     },

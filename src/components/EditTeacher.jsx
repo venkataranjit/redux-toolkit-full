@@ -9,9 +9,9 @@ import { updateTeacher } from "../app/teachersSlice";
 import { Slide, toast } from "react-toastify";
 
 const EditTeacher = ({ show, handleClose, editID }) => {
-  const teacherSlice = useSelector((state) => state.teacher);
+  const teacherState = useSelector((state) => state.teacher);
   const dispatch = useDispatch();
-  const teacher = teacherSlice.teachers.find((t) => t.id === editID);
+  const teacher = teacherState.teachers.find((t) => t.id === editID);
 
   const validation = Yup.object({
     teacherName: Yup.string()
