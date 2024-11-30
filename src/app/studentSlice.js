@@ -43,9 +43,7 @@ export const deleteStudent = createAsyncThunk(
   "student/delete",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:3001/studentData/${id}`
-      );
+      await axios.delete(`http://localhost:3001/studentData/${id}`);
 
       return id;
     } catch (error) {
@@ -71,7 +69,7 @@ export const editStudent = createAsyncThunk(
   }
 );
 
-export const studentSlice = createSlice({
+const studentSlice = createSlice({
   name: "student",
   initialState,
   reducers: {
