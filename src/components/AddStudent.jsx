@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
 import { Button, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import * as Yup from "yup";
 import { addStudent, editStudent } from "../app/studentSlice";

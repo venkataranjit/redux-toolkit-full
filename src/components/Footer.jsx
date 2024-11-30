@@ -1,4 +1,3 @@
-import React from "react";
 import "./footer.css";
 
 const Footer = () => {
@@ -7,7 +6,7 @@ const Footer = () => {
       <footer className="footer">
         <div className="container">
           <span className="text-muted">
-            Redux Toolkit and Redux createAsyncThunk.
+            Redux Toolkit and Redux createAsyncThunk by Ranjit.
           </span>
         </div>
       </footer>

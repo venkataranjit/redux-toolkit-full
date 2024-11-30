@@ -8,7 +8,7 @@ const initialState = {
   updateTeacher: {},
 };
 
-export const teacherSlice = createSlice({
+const teacherSlice = createSlice({
   name: "teacher",
   initialState,
   reducers: {

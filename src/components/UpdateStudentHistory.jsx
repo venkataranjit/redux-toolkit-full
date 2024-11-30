@@ -1,4 +1,3 @@
-import React from "react";
 import { FormLabel, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
@@ -6,7 +5,7 @@ const UpdateStudentHistory = () => {
   const studentState = useSelector((state) => state.student);
   return (
     <>
-      {studentState.recentlyAddedStudent.hasOwnProperty("studentName") && (
+      {studentState.recentlyAddedStudent?.studentName && (
         <>
           <FormLabel>Recently Added Student</FormLabel>
           <Table striped bordered hover size="sm">
@@ -19,7 +18,7 @@ const UpdateStudentHistory = () => {
           </Table>
         </>
       )}
-      {studentState.recentlyEditedStudent.hasOwnProperty("studentName") && (
+      {studentState.recentlyEditedStudent?.studentName && (
         <>
           <FormLabel>Recently Updated Student</FormLabel>
           <Table striped bordered hover size="sm">
@@ -32,7 +31,7 @@ const UpdateStudentHistory = () => {
           </Table>
         </>
       )}
-      {studentState.recentlyDeletedStudent.hasOwnProperty("studentName") && (
+      {studentState.recentlyDeletedStudent?.studentName && (
         <>
           <FormLabel>Recently Deleted Student</FormLabel>
           <Table striped bordered hover size="sm">

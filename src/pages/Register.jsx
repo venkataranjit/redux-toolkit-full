@@ -9,8 +9,15 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { Alert } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../app/usersSlice";
+import Loader from "../components/Loader";
+import ErrorMsg from "../components/ErrorMsg";
+import { Slide, toast } from "react-toastify";
 
 const Register = () => {
+  const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [captchaError, setCaptchaError] = useState("");
   const [showPassword, setShowPassword] = useState({
     pwd: false,
@@ -30,27 +37,49 @@ const Register = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string().email().required("Email Required"),
-    password: Yup.string().required("Enter password"),
+    password: Yup.string()
+      .required("Enter password")
+      .min(8, "min 8 characters required"),
     confirmPassword: Yup.string()
       .required("Confirm password Required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
     user_captcha_input: Yup.string().required("Captcha is required"),
   });
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
     if (validateCaptcha(values.user_captcha_input)) {
-      console.log("Form Submitted Successfully:", values);
+      await dispatch(
+        registerUser({ email: values.email, password: values.password })
+      );
       setCaptchaError("");
       resetForm();
       loadCaptchaEnginge(6);
+      toast("User Registered Succesfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Slide,
+      });
     } else {
       setCaptchaError("Captcha does not match");
     }
   };
 
   useEffect(() => {
-    loadCaptchaEnginge(6, "#f8f9fa");
-  }, []);
+    loadCaptchaEnginge(6);
+  }, [dispatch]);
+
+  if (userState.isLoading) {
+    return <Loader />;
+  }
+  if (userState.error) {
+    return <ErrorMsg />;
+  }
 
   return (
     <>
@@ -71,6 +100,7 @@ const Register = () => {
               id="inputEmail"
               className="form-control"
               placeholder="Email address"
+              autoComplete="email"
               autoFocus
             />
             <ErrorMessage
@@ -88,6 +118,7 @@ const Register = () => {
                 id="inputPassword"
                 className="form-control"
                 placeholder="Password"
+                autoComplete="password"
               />
               <span
                 className="material-icons show-password"
@@ -112,6 +143,7 @@ const Register = () => {
                 id="inputConfirmPassword"
                 className="form-control"
                 placeholder="Confirm Password"
+                autoComplete="password"
               />
               <span
                 className="material-icons show-password"
