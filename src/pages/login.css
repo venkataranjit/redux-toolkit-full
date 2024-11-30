@@ -5,7 +5,7 @@
   margin: auto;
   background: #f8f9fa;
   border-radius: 10px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .form-signin .checkbox {
   font-weight: 400;
@@ -45,4 +45,12 @@
 }
 .form-signin input[type="text"] {
   margin-bottom: 10px;
+}
+.captchaPosition {
+  position: relative;
+  a {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
 }

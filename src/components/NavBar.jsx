@@ -18,7 +18,7 @@ const NavBar = () => {
             <Nav.Link as={NavLink} to="/students">
               Students
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/logout">
+            <Nav.Link as={NavLink} to="/login">
               Logout
             </Nav.Link>
           </Nav>
