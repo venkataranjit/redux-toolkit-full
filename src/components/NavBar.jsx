@@ -27,6 +27,7 @@ const NavBar = () => {
               Students
             </Nav.Link>
             <Nav.Link
+              to=""
               as={NavLink}
               onClick={async () => {
                 await dispatch(logout());
