@@ -43,6 +43,7 @@ const Login = () => {
       setCaptchaError("");
       loadCaptchaEnginge(6);
     } else {
+      loadCaptchaEnginge(6);
       setCaptchaError("Captcha Does Not Match");
     }
   };
@@ -127,11 +128,11 @@ const Login = () => {
               <label className="form-label">
                 Don&apos;t Have Login <Link to="/register"> Register Here</Link>
               </label>
+              {userState.error && <ErrorMsg />}
             </Form>
           </>
         )}
       </Formik>
-      {userState.error && <ErrorMsg />}
     </>
   );
 };

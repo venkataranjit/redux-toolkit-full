@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import "./App.css";
 import NavBar from "./components/NavBar";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
 import Students from "./pages/Students";
@@ -18,45 +18,45 @@ function App() {
   return (
     <>
       <ToastContainer />
+      {userState.loggedInUser?.email && <NavBar />}
+
       <Routes>
-        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Container>
+                <Home />
+              </Container>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teachers"
+          element={
+            <ProtectedRoute>
+              <Container>
+                <Teachers />
+              </Container>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/students"
+          element={
+            <ProtectedRoute>
+              <Container>
+                <Students />
+              </Container>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-      {userState.loggedInUser?.email && (
-        <>
-          <NavBar />
-          <Container>
-            <Routes>
-              <Route
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/teachers"
-                element={
-                  <ProtectedRoute>
-                    <Teachers />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/students"
-                element={
-                  <ProtectedRoute>
-                    <Students />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </Container>
-          <Footer />
-        </>
-      )}
+
+      {userState.loggedInUser?.email && <Footer />}
     </>
   );
 }

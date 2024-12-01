@@ -57,7 +57,7 @@ export const logout = createAsyncThunk(
   "user/logout",
   async (_, { fulfillWithValue }) => {
     try {
-      return fulfillWithValue;
+      return fulfillWithValue(null);
     } catch (e) {
       throw new Error("Failed to logout", e);
     }
