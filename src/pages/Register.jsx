@@ -48,23 +48,38 @@ const Register = () => {
 
   const onSubmit = async (values, { resetForm }) => {
     if (validateCaptcha(values.user_captcha_input)) {
-      await dispatch(
-        registerUser({ email: values.email, password: values.password })
-      );
-      setCaptchaError("");
-      resetForm();
-      loadCaptchaEnginge(6);
-      toast("User Registered Succesfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Slide,
-      });
+      try {
+        await dispatch(
+          registerUser({ email: values.email, password: values.password })
+        ).unwrap();
+        setCaptchaError("");
+        resetForm();
+        loadCaptchaEnginge(6);
+        toast("User Registered Succesfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Slide,
+        });
+      } catch (e) {
+        toast(e.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Slide,
+        });
+        loadCaptchaEnginge(6);
+      }
     } else {
       setCaptchaError("Captcha does not match");
     }
@@ -76,9 +91,6 @@ const Register = () => {
 
   if (userState.isLoading) {
     return <Loader />;
-  }
-  if (userState.error) {
-    return <ErrorMsg />;
   }
 
   return (
@@ -101,7 +113,6 @@ const Register = () => {
               className="form-control"
               placeholder="Email address"
               autoComplete="email"
-              autoFocus
             />
             <ErrorMessage
               component="div"
@@ -182,6 +193,7 @@ const Register = () => {
             <label className="form-label">
               Already Have an account? <Link to="/login"> Login Here</Link>
             </label>
+            {userState.error && <ErrorMsg />}
           </Form>
         )}
       </Formik>

@@ -9,23 +9,54 @@ import { ToastContainer } from "react-toastify";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { useSelector } from "react-redux";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const userState = useSelector((state) => state.user);
+
   return (
     <>
       <ToastContainer />
-      <NavBar />
-      <Container>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/teachers" element={<Teachers />} />
-          <Route path="/students" element={<Students />} />
-        </Routes>
-      </Container>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+      {userState.loggedInUser?.email && (
+        <>
+          <NavBar />
+          <Container>
+            <Routes>
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/teachers"
+                element={
+                  <ProtectedRoute>
+                    <Teachers />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/students"
+                element={
+                  <ProtectedRoute>
+                    <Students />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </Container>
+          <Footer />
+        </>
+      )}
     </>
   );
 }
