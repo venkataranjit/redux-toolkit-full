@@ -19,7 +19,7 @@ const NavBar = () => {
               Students
             </Nav.Link>
             <Nav.Link as={NavLink} to="/login">
-              Logout
+              Logout User
             </Nav.Link>
           </Nav>
         </Container>
