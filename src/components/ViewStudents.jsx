@@ -41,7 +41,11 @@ const ViewStudents = () => {
             <tr key={s.id}>
               <td>{s.id.substring(0, 10)}</td>
               <td>{s.studentName}</td>
-              <td>{s.studentClass}</td>
+              <td>
+                {s.studentClass === "others"
+                  ? s.studentClassFeild
+                  : s.studentClass}
+              </td>
               <td style={{ textAlign: "center" }}>
                 <Button
                   size="sm"

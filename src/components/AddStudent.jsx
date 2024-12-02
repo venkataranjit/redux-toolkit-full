@@ -13,6 +13,7 @@ const AddStudent = () => {
   const [initialValues, setInitialValues] = useState({
     studentName: "",
     studentClass: "",
+    studentClassFeild: "",
   });
 
   const editedStudent = studentState.students.find(
@@ -24,17 +25,20 @@ const AddStudent = () => {
       setInitialValues({
         studentName: editedStudent.studentName,
         studentClass: editedStudent.studentClass,
+        studentClassFeild: editedStudent.studentClassFeild,
       });
     } else {
       setInitialValues({
         studentName: "",
         studentClass: "",
+        studentClassFeild: "",
       });
     }
   }, [studentState.isEdit]);
 
   const validationSchema = Yup.object({
     studentName: Yup.string().required("Student Name is Required"),
+    studentClassFeild: Yup.string().required("Student Class is Required"),
   });
 
   const validate = (values) => {
@@ -85,7 +89,7 @@ const AddStudent = () => {
         validate={validate}
         onSubmit={onSubmit}
       >
-        {({ isValid, dirty }) => (
+        {({ isValid, dirty, values }) => (
           <Form>
             <FormGroup className="mb-3" controlId="studentName">
               <FormLabel>Student Name</FormLabel>
@@ -103,18 +107,45 @@ const AddStudent = () => {
             ></ErrorMessage>
             <FormGroup className="mb-3" controlId="studentClass">
               <FormLabel>Student Class</FormLabel>
-              <FormControl
-                as={Field}
-                type="text"
+              <Field
+                as="select"
                 placeholder="Student Class"
                 name="studentClass"
-              />
+                className="form-select"
+              >
+                <option disabled selected value="">
+                  Select Class
+                </option>
+                <option value="1st">1st Std</option>
+                <option value="2nd">2nd Std</option>
+                <option value="3rd">3rd Std</option>
+                <option value="others">Others</option>
+              </Field>
             </FormGroup>
             <ErrorMessage
               component="div"
               className="alert alert-danger"
               name="studentClass"
             />
+            {values.studentClass === "others" ? (
+              <>
+                <FormGroup className="mb-3" controlId="studentClassFeild">
+                  <FormControl
+                    as={Field}
+                    type="text"
+                    placeholder="Enter Class"
+                    name="studentClassFeild"
+                  />
+                </FormGroup>
+                <ErrorMessage
+                  component="div"
+                  className="alert alert-danger"
+                  name="studentClassFeild"
+                ></ErrorMessage>
+              </>
+            ) : (
+              ""
+            )}
             <Button
               variant="primary"
               type="submit"

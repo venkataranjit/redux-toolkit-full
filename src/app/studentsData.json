@@ -3,7 +3,7 @@
     {
       "id": "a8af1d99-87c3-4a4d-b5c4-0dabe3a5f2be",
       "studentName": "John Doe",
-      "studentClass": "10AAA"
+      "studentClass": "10AAA3"
     },
     {
       "id": "d6f7a001-3cd9-46b2-89f3-99fc36f8b7f5",
@@ -23,7 +23,8 @@
     {
       "id": "ed2bc2d6-5116-452e-941d-632ff61fbc01",
       "studentName": "William Johnson",
-      "studentClass": "7A"
+      "studentClass": "others",
+      "studentClassFeild": "w"
     },
     {
       "id": "d46dfd8a-1f56-4c6f-b915-b21d2b1e4551",
